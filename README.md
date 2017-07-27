@@ -16,6 +16,36 @@ username : **abaco**
 # Debootstrap
 Systems created with [Debootstrap](https://wiki.debian.org/Debootstrap).
 
+An example script showing how you can get started with the Jetson TX2:
+
+```
+#!/bin/bash
+apt-get install debootstrap
+rm -rf ./Linux_for_Tegra
+mkdir ./Linux_for_Tegra
+export ARCH=arm64
+PACKAGE=ubuntu-desktop
+RELEASE=xenial
+
+debootstrap \
+        --arch=$ARCH \
+        --keyring=/usr/share/keyrings/ubuntu-archive-keyring.gpg \
+        --verbose \
+        --foreign \
+        --variant=minbase \
+        --include=$PACKAGE \
+        $RELEASE \
+        ./Linux_for_Tegra/rootfs
+cp /usr/bin/qemu-aarch64-static ./Linux_for_Tegra/rootfs/usr/bin
+cd ./Linux_for_Tegra/rootfs
+chroot . /bin/bash -c "/debootstrap/debootstrap --second-stage" 
+# Open a QEMU shell to make any additional modifications. You can use apt-get at this point.
+chroot . /bin/bash 
+# When done create a filesystem archive
+sudo tar -cvjSf Tegra_Linux_Sample-Root-Filesystem_${RELEASE}_${PACKAGE}_aarch64.tbz2 *
+cd -
+```
+
 # Ubuntu Base
 Pre made minimal filesystems are also available from Ubuntu and are reffered to as [Ubuntu Base](https://wiki.ubuntu.com/Base).
 
