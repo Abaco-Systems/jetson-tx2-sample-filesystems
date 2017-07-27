@@ -7,7 +7,10 @@ These are some example TX sample file systems that can be used as an alternative
 These have been tested against the latest L4T R28.1 (July 2017).
 
 * Debootstrap created Xenial filesystem with minimal Xfce4 Desktop Environment
-* Debootstrap created Xenial filesystem with minimal commandline only
+* Debootstrap created Xenial filesystem with minimal command line only
+
+NOTE
+> Command line only filesystem includes some additional packaged to get you going these include ethtool, isc-dhcp-client, nano, net-tools, pci-utils, ping, sudo, udev. Xfce4 Desktop Environment also contains these tools plut a minimal Desktop Environment. 
 
 All file systems come with one administrator user account  
 password : **abaco**  
