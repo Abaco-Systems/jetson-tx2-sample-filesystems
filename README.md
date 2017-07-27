@@ -1,3 +1,5 @@
+![Abaco stripe](abaco/Abaco_background-1000x275.png)
+
 # Sample Filesystems (nVidia Tegra TX2)
 
 These are some example TX sample file systems that can be used as an alternative to the tegra sample filesystem provided by nVidia.
@@ -16,3 +18,5 @@ Systems created with [Debootstrap](https://wiki.debian.org/Debootstrap).
 
 # Ubuntu Base
 Pre made minimal filesystems are also available from Ubuntu and are reffered to as [Ubuntu Base](https://wiki.ubuntu.com/Base).
+
+![Abaco stripe](abaco/Abaco%20Footer1000x100.png)
