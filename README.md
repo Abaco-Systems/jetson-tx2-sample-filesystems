@@ -16,6 +16,8 @@ All file systems come with one administrator user account
 password : **abaco**  
 username : **abaco**
 
+Due to the size of the images they are available as Releases. Please download Release R28_1.
+
 # Debootstrap
 Systems created with [Debootstrap](https://wiki.debian.org/Debootstrap).
 
@@ -48,6 +50,9 @@ chroot . /bin/bash
 sudo tar -cvjSf Tegra_Linux_Sample-Root-Filesystem_${RELEASE}_${PACKAGE}_aarch64.tbz2 *
 cd -
 ```
+
+![Xfce Desktop](abaco/Screenshot_2017-07-28_08-15-48.png)
+Debootstrap filesystem running Xrce4 Desktop Environment.
 
 # Ubuntu Base
 Pre made minimal filesystems are also available from Ubuntu and are reffered to as [Ubuntu Base](https://wiki.ubuntu.com/Base).
