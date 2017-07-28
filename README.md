@@ -6,8 +6,10 @@ These are some example TX sample file systems that can be used as an alternative
 
 These have been tested against the latest L4T R28.1 (July 2017).
 
-* Debootstrap created Xenial filesystem with minimal Xfce4 Desktop Environment
-* Debootstrap created Xenial filesystem with minimal command line only
+* Debootstrap created Xenial filesystem with minimal Xfce4 Desktop Environment - [Tegra_Linux_Sample-Root-Filesystem_Debootstrap_cmdline_aarch64.tbz2](https://github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1/Tegra_Linux_Sample-Root-Filesystem_Debootstrap_cmdline_aarch64.tbz2)
+* Debootstrap created Xenial filesystem with minimal command line only - [Tegra_Linux_Sample-Root-Filesystem_Debootstrap_xfce4_aarch64.tbz2](https://github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1/Tegra_Linux_Sample-Root-Filesystem_Debootstrap_xfce4_aarch64.tbz2)
+
+To flash these images follow the [Quickstart Guide](https://developer.nvidia.com/embedded/dlc/l4t-quick-start-guide-28-1) on the nVidia website and substitue these filesystems for the nVidia sample filesystem.
 
 NOTE
 > Command line only filesystem includes some additional packaged to get you going these include ethtool, isc-dhcp-client, nano, net-tools, pci-utils, ping, sudo, udev. Xfce4 Desktop Environment also contains these tools plut a minimal Desktop Environment. 
@@ -57,4 +59,9 @@ Debootstrap filesystem running Xrce4 Desktop Environment.
 # Ubuntu Base
 Pre made minimal filesystems are also available from Ubuntu and are reffered to as [Ubuntu Base](https://wiki.ubuntu.com/Base).
 
+# Links
+* [Linux For Tegra R28.1](https://developer.nvidia.com/embedded/linux-tegra)
+* [GVC1000 Rugged TX2](https://www.abaco.com/products/gvc1000)
+
 ![Abaco stripe](abaco/Abaco%20Footer1000x100.png)
+
