@@ -67,6 +67,7 @@ Pre made minimal filesystems are also available from Ubuntu and are reffered to 
 # Links
 * [Linux For Tegra R28.1](https://developer.nvidia.com/embedded/linux-tegra)
 * [GVC1000 Rugged TX2](https://www.abaco.com/products/gvc1000)
+* [eLinux setup tips](http://elinux.org/Jetson/TX2_Ubuntu_Base)
 
 ![Abaco stripe](abaco/Abaco%20Footer1000x100.png)
 
