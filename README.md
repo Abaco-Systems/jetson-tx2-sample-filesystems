@@ -6,8 +6,9 @@ These are some example TX2 sample file systems that can be used as an alternativ
 
 These have been tested against the latest L4T R28.1 (July 2017).
 
-* Debootstrap created Xenial filesystem with minimal Xfce4 Desktop Environment - [Tegra_Linux_Sample-Root-Filesystem_Debootstrap_cmdline_aarch64.tbz2](https://github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1/Tegra_Linux_Sample-Root-Filesystem_Debootstrap_cmdline_aarch64.tbz2)
-* Debootstrap created Xenial filesystem with minimal command line only - [Tegra_Linux_Sample-Root-Filesystem_Debootstrap_xfce4_aarch64.tbz2](https://github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1/Tegra_Linux_Sample-Root-Filesystem_Debootstrap_xfce4_aarch64.tbz2)
+* Debootstrap created Xenial filesystem with minimal command line only - [Tegra_Linux_Sample-Root-Filesystem_Debootstrap_cmdline_aarch64.tbz2](https://github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1/Tegra_Linux_Sample-Root-Filesystem_Debootstrap_cmdline_aarch64.tbz2)
+* Debootstrap created Xenial filesystem with minimal Xfce4 Desktop Environment - [Tegra_Linux_Sample-Root-Filesystem_Debootstrap_xfce4_aarch64.tbz2](https://github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1/Tegra_Linux_Sample-Root-Filesystem_Debootstrap_xfce4_aarch64.tbz2)
+* Debootstrap created Xenial filesystem with minimal Lxde Desktop Environment only - [Tegra_Linux_Sample-Root-Filesystem_Debootstrap_lxde_aarch64.tbz2](https://github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1/Tegra_Linux_Sample-Root-Filesystem_Debootstrap_lxde_aarch64.tbz2)
 
 To flash these images follow the [Quickstart Guide](https://developer.nvidia.com/embedded/dlc/l4t-quick-start-guide-28-1) on the nVidia website and substitue these filesystems for the nVidia sample filesystem.
 
@@ -28,10 +29,9 @@ An example script showing how you can get started with the Jetson TX2:
 ```
 #!/bin/bash
 apt-get install debootstrap
-rm -rf ./Linux_for_Tegra
 mkdir ./Linux_for_Tegra
 export ARCH=arm64
-PACKAGE=ubuntu-desktop
+PACKAGE=nano
 RELEASE=xenial
 
 debootstrap \
@@ -56,6 +56,9 @@ cd -
 A word of warning you will need to configure your filesystem as this will not function without some basic setup and accont creation prior to flashing. The sample filesystems above have been pre-configured to come up working. There is a great article on the Debian website that will help you setup your filesystem [here](https://www.debian.org/releases/stable/amd64/apds03.html.en).
 
 ![Xfce Desktop](abaco/Screenshot_2017-07-28_08-15-48.png)
+Debootstrap filesystem running Xrce4 Desktop Environment.
+
+![Xfce Desktop](abaco/Screenshot_2017-07-28_12-55-19.png)
 Debootstrap filesystem running Xrce4 Desktop Environment.
 
 # Ubuntu Base
