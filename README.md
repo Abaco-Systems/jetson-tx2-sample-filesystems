@@ -2,7 +2,7 @@
 
 # Sample Filesystems (nVidia Tegra TX2)
 
-These are some example TX sample file systems that can be used as an alternative to the tegra sample filesystem provided by nVidia.
+These are some example TX2 sample file systems that can be used as an alternative to the tegra sample filesystem provided by nVidia. These filesystems are lean and more suited to Embedded Developments where you do not require a full desktop experiance. You can add in the components you need to build up your filesystem to meet your requirements using **apt-get**.
 
 These have been tested against the latest L4T R28.1 (July 2017).
 
