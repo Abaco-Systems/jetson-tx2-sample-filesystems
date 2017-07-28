@@ -53,6 +53,8 @@ sudo tar -cvjSf Tegra_Linux_Sample-Root-Filesystem_${RELEASE}_${PACKAGE}_aarch64
 cd -
 ```
 
+Additional packages can be specified in your file system if you add them to --include. The example above will include the text editor **nano**. Examples assumes a forign host i,e, Intel x86_64 Linux, tested on Ubuntu 16.04 LTS.
+
 A word of warning you will need to configure your filesystem as this will not function without some basic setup and accont creation prior to flashing. The sample filesystems above have been pre-configured to come up working. There is a great article on the Debian website that will help you setup your filesystem [here](https://www.debian.org/releases/stable/amd64/apds03.html.en).
 
 ![Xfce Desktop](abaco/Screenshot_2017-07-28_08-15-48.png)
