@@ -53,6 +53,8 @@ sudo tar -cvjSf Tegra_Linux_Sample-Root-Filesystem_${RELEASE}_${PACKAGE}_aarch64
 cd -
 ```
 
+A word of warning you will need to configure your filesystem as this will not function without some basic setup and accont creation prior to flashing. The sample filesystems above have been pre-configured to come up working. There is a great article on the Debian website that will help you setup your filesystem [here](https://www.debian.org/releases/stable/amd64/apds03.html.en).
+
 ![Xfce Desktop](abaco/Screenshot_2017-07-28_08-15-48.png)
 Debootstrap filesystem running Xrce4 Desktop Environment.
 
