@@ -61,7 +61,7 @@ A word of warning you will need to configure your filesystem as this will not fu
 Debootstrap filesystem running Xfce4 Desktop Environment.
 
 ![Xfce Desktop](abaco/Screenshot_2017-07-28_12-55-19.png)
-Debootstrap filesystem running Xrce4 Desktop Environment.
+Debootstrap filesystem running Lxde Desktop Environment.
 
 # Ubuntu Base
 Pre made minimal filesystems are also available from Ubuntu and are reffered to as [Ubuntu Base](https://wiki.ubuntu.com/Base).
