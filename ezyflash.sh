@@ -198,14 +198,17 @@ Exit \"Exit to the shell\"  2> \"${INPUT}\""
     cmdline) DOWNLOAD_PATH=github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1;
              DOWNLOAD_FS=Tegra_Linux_Sample-Root-Filesystem_Debootstrap_cmdline_aarch64.tbz2;
              VERSION=" - Github Debootstrap command line Ubuntu (xenial)"
+             USER=abaco;PASSWORD=abaco;
              ;;
     xfce4) DOWNLOAD_PATH=github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1;
            DOWNLOAD_FS=Tegra_Linux_Sample-Root-Filesystem_Debootstrap_xfce4_aarch64.tbz2;
            VERSION=" - Github Debootstrap Xfce4 line Ubuntu (xenial)"
+           USER=abaco;PASSWORD=abaco;
            ;;
     lxde) DOWNLOAD_PATH=github.com/Abaco-Systems/tx2-sample-filesystems/releases/download/R28_1;
           DOWNLOAD_FS=Tegra_Linux_Sample-Root-Filesystem_Debootstrap_lxde_aarch64.tbz2;
-           VERSION=" - Github Debootstrap Lxdes line Ubuntu (xenial)"
+          VERSION=" - Github Debootstrap Lxdes line Ubuntu (xenial)"
+          USER=abaco;PASSWORD=abaco;
           ;;
     nvidia) DOWNLOAD_PATH=${NVIDIA_PATH}/BSP;DOWNLOAD_FS=${SAMPLE_FS_PACKAGE};;
     Exit) abort;exit;;
@@ -224,10 +227,9 @@ Exit \"Exit to the shell\"  2> \"${INPUT}\""
   wget -nc -q http://${NVIDIA_PATH}/BSP/${L4T_RELEASE_PACKAGE}
 
   echo '60' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${PREPARE}" --gauge "Expanding ${L4T_RELEASE_PACKAGE}" ${PROGRESS_HEIGHT} 75 0
-  tar xpf ${L4T_RELEASE_PACKAGE} &> /dev/null
+  tar xf ./${L4T_RELEASE_PACKAGE} 
 
-
-  cd ./Linux_for_Tegra/rootfs/  &> /dev/null
+  cd ./Linux_for_Tegra/rootfs
   TMP=${DOWNLOAD_FS##*/} 
   echo '80' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${PREPARE}" --gauge "Expanding ${TMP}" ${PROGRESS_HEIGHT} 75 0
   tar xpf ${DOWNLOAD_FS}
@@ -249,17 +251,12 @@ Exit \"Exit to the shell\"  2> \"${INPUT}\""
   chroot . /bin/bash -c "sed -i 's/# deb http/deb http/g' /etc/apt/sources.list"
   echo '20' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${CONFIGURE}" --gauge 'Updating apt-get...' ${PROGRESS_HEIGHT} 70 
   chroot . /bin/bash -c "apt-get update > /dev/null"
-  echo '30' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${CONFIGURE}" --gauge 'Installing packages...' ${PROGRESS_HEIGHT} 70 
-  install_packlunch
     
   # Offer to open a QEMU chroot shell for manual probing of filesystem
   ask_open_shell /Linux_for_Tegra/rootfs 
 
   # Now flash the target
   flash_filesystem
-
-  # Basic usage info (anonymous)
-  wget -O /dev/null "http://dweet.io/dweet/for/abaco-l4t-setup?OS=Linux4Tegra&Version=17.01Setup_Time=$SECONDS&Date=$DATE"  &> /dev/null
 
   dialog --backtitle "${ABACO_TITLE}${VERSION}" \
   --colors \
@@ -268,9 +265,7 @@ Exit \"Exit to the shell\"  2> \"${INPUT}\""
 Filesystem setup complete you can now login using:\n
    username:\Zb\Z0${USER}\Zn\n
    password:\Zb\Z0${PASSWORD}\Zn\n\n
-If the network device is not working you will need to rebuild\n
-the kernel to include your device.\n
-\n\n"  16 70
+\n\n"  12 70
   clear
 }
 
@@ -393,7 +388,7 @@ KERNEL=/$KERNEL\n" 10 70
   mkdir $TEGRA_KERNEL_OUT/modules
   make -j$CORES O=$TEGRA_KERNEL_OUT modules_install INSTALL_MOD_PATH=./modules | dialog --colors --backtitle "${ABACO_TITLE} - \Z1Please wait for build to complete\Z0" --timeout $TIMEOUT $BOX_TYPE "Installing Modules..."  25 85
   cd $TEGRA_KERNEL_OUT/modules &> /dev/null
-  tar --owner root --group root -cjf kernel_supplements.tbz2 lib/modules &> /dev/null
+  tar --owner root --group root -cjf kernel_supplements.tbz2 lib/modules 
   cd - &> /dev/null
   KBUILD_END=$SECONDS
   KBUILD_TIME=$(($KBUILD_END - $KBUILD_START))
