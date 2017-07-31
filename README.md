@@ -24,7 +24,11 @@ Due to the size of the images they are available as Releases. Please download Re
 # Using ezyflash.sh
 This script makes flashing these images a breeze. Connect you TX2 and put it into reset.
 
-Run the script and select the release then the filesystem image you want to flash. Possible images are shown in the screenshots below:
+Run the script at root and select the release then the filesystem image you want to flash. 
+
+`$ sudo ezyflash.sh`
+
+Possible images are shown in the screenshots below:
 
 ![Select Operation](abaco/select-operation.png)
 Select the operation. Script supports flashing and kernel build. If you build the kernel then this can be patched into the filesystem when you flash.
