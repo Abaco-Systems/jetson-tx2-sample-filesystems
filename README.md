@@ -26,7 +26,8 @@ This script makes flashing these images a breeze. Connect you TX2 and put it int
 
 Run the script at root and select the release then the filesystem image you want to flash. 
 
-```$ sudo bash
+```
+$ sudo bash
 root $ ezyflash.sh
 ```
 
