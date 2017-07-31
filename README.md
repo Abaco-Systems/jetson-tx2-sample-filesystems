@@ -30,7 +30,16 @@ Run the script and select the release then the filesystem image you want to flas
 Select the operation. Script supports flashing and kernel build. If you build the kernel then this can be patched into the filesystem when you flash.
 
 ![Select File System](abaco/select-fs.png)
-Select your filesystem
+Select your filesystem.
+
+The script will offer to run QEMU and open a chroot shell at this point (see below). 
+
+Finally the script will detect the target and offer to flash the image onto your TX2.
+
+## QEMU Emulator
+This script will setup the QEMU emulator for aarch64. Once the file system is extracted and apply_binaries have been applied you can modify the file system using QEMU. The script will ask the user if you which to open a shell to perform additional steps.
+
+It can be usefull to run apt-get install to add additional packages at this point.
 
 # Debootstrap
 Systems created with [Debootstrap](https://wiki.debian.org/Debootstrap).
