@@ -107,14 +107,14 @@ clean() {
 }
 
 flash_filesystem() {
-  cd ${ROOT}/Linux_for_Tegra  &> /dev/null
+  cd ${ROOT}/Linux_for_Tegra
 
   FLASH_OK=false;
-  while [ $FLASH_OK == false ]; do
-    lsusb | grep -i nvidia &> /dev/null
+  while [ $FLASH_OK = false ]; do
+    lsusb | grep -i nvidia
 
     NVIDIA_READY=$?
-    if ((${NVIDIA_READY} > 0)); then
+    if [ ${NVIDIA_READY} -gt 0 ]; then
       NVIDIA_READY="\Z1CAUTION: Could not find nVidia device on USB. Please run 'lsusb' and make sure your device is connected to the host before continuing.\Z0\n"
     else
       NVIDIA_READY="\Z2NOTE: Found nVidia device on USB ready to flash.\Z0\n"
@@ -126,11 +126,12 @@ flash_filesystem() {
     response=$?
     case $response in
        0) clean; # Last thing we do is clean the filesystem
-          sudo ./flash.sh $1 ${BOARD} mmcblk0p1 2> /dev/null | dialog --colors --backtitle "${ABACO_TITLE} - \Z1Please wait for flashing to complete\Z0" --exit-label 'Exit when flash completes' --programbox "Flashing target..." 25 85 2> /dev/null; FLASH_OK=true;;
+          sudo ./flash.sh $1 ${BOARD} mmcblk0p1  | dialog --colors --backtitle "${ABACO_TITLE} - \Z1Please wait for flashing to complete\Z0" --exit-label 'Exit when flash completes' --programbox "Flashing target..." 25 85 2> /dev/null; FLASH_OK=true;;
        1) abort; clear; exit -1;;
        255) echo "[ESC] key pressed.";;
     esac
    done
+exit
   cd - &> /dev/null
 }
 
@@ -161,7 +162,7 @@ ask_open_shell() {
 
   response=$?
   case $response in
-     0) cd $ROOT/Linux_for_Tegra/rootfs &> /dev/null;gnome-terminal -e "bash -c \"printf 'Abaco QEMU shell for $OS\nPlease make any modifications then type exit to finish:\n\n';LANG=en_US.UTF-8 chroot . /bin/bash\"" &> /dev/null
+     0) cd $ROOT/Linux_for_Tegra/rootfs;gnome-terminal -e "bash -c \"printf 'Abaco QEMU shell for $OS\nPlease make any modifications then type exit to finish:\n\n';LANG=en_US.UTF-8 chroot . /bin/bash\"" &> /dev/null
         cd ..
         dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "QEMU filesystem shell open..." --msgbox "Press OK when you have finished modifying the filesystem." 5 70
         ;;
@@ -310,7 +311,7 @@ rebuild_kernel() {
   rm -rf nvl4t_docs
   rm -rf build
   rm -rf hardware
-  echo '15' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${BUILD}" --gauge 'Getting kernel sources $L4T_SOURCES...' ${PROGRESS_HEIGHT} 70 
+  echo '15' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${BUILD}" --gauge "Getting kernel sources $L4T_SOURCES..." ${PROGRESS_HEIGHT} 70 
   wget -nc -q http://${NVIDIA_PATH}/BSP/${L4T_SOURCES}
   echo '30' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${BUILD}" --gauge 'Getting toolchain...' ${PROGRESS_HEIGHT} 70 
   wget -nc -q http://${NVIDIA_PATH}/BSP/${L4T_COMPILER}
