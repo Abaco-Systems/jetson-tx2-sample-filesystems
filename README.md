@@ -21,6 +21,17 @@ username : **abaco**
 
 Due to the size of the images they are available as Releases. Please download Release R28_1.
 
+# Using ezyflash.sh
+This script makes flashing these images a breeze. Connect you TX2 and put it into reset.
+
+Run the script and select the release then the filesystem image you want to flash. Possible images are shown in the screenshots below:
+
+![Select Operation](abaco/select-operation.png)
+Select the operation. Script supports flashing and kernel build. If you build the kernel then this can be patched into the filesystem when you flash.
+
+![Select File System](abaco/select-fs.png)
+Select your filesystem
+
 # Debootstrap
 Systems created with [Debootstrap](https://wiki.debian.org/Debootstrap).
 
@@ -60,7 +71,7 @@ A word of warning you will need to configure your filesystem as this will not fu
 ![Xfce Desktop](abaco/Screenshot_2017-07-28_08-15-48.png)
 Debootstrap filesystem running Xfce4 Desktop Environment.
 
-![Xfce Desktop](abaco/Screenshot_2017-07-28_12-55-19.png)
+![Lxde Desktop](abaco/Screenshot_2017-07-28_12-55-19.png)
 Debootstrap filesystem running Lxde Desktop Environment.
 
 # Ubuntu Base
