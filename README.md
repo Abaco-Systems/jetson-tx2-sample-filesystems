@@ -30,6 +30,10 @@ Run the script at root and select the release then the filesystem image you want
 $ sudo bash
 root $ ezyflash.sh
 ```
+or
+```
+$ sudo bash -c "./ezyflash.sh"
+```
 
 Possible images are shown in the screenshots below:
 
