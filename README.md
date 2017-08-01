@@ -19,7 +19,9 @@ All file systems come with one administrator user account
 password : **abaco**  
 username : **abaco**
 
-Due to the size of the images they are available as Releases. Please download Release R28_1.
+Due to the size of the images they are available as Releases. Please download Release R28_1 to get all the file systems ot down load them invividually by clicking on the release.
+
+The ezyflash.sh script below will automatically download the images to your machine and flash your board.
 
 # Using ezyflash.sh
 This script makes flashing these images a breeze. Connect you TX2 and put it into reset.
