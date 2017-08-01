@@ -107,13 +107,14 @@ clean() {
 }
 
 flash_filesystem() {
-  cd ${ROOT}/Linux_for_Tegra
+  cd $ROOT/Linux_for_Tegra &> /dev/null
 
   FLASH_OK=false;
   while [ $FLASH_OK = false ]; do
-    lsusb | grep -i nvidia
+    lsusb | grep -i nvidia   &> /dev/null
 
     NVIDIA_READY=$?
+
     if [ ${NVIDIA_READY} -gt 0 ]; then
       NVIDIA_READY="\Z1CAUTION: Could not find nVidia device on USB. Please run 'lsusb' and make sure your device is connected to the host before continuing.\Z0\n"
     else
@@ -126,7 +127,7 @@ flash_filesystem() {
     response=$?
     case $response in
        0) clean; # Last thing we do is clean the filesystem
-          sudo ./flash.sh $1 ${BOARD} mmcblk0p1  | dialog --colors --backtitle "${ABACO_TITLE} - \Z1Please wait for flashing to complete\Z0" --exit-label 'Exit when flash completes' --programbox "Flashing target..." 25 85 2> /dev/null; FLASH_OK=true;;
+          sudo ./flash.sh $1 ${BOARD} mmcblk0p1  2> /dev/null | dialog --colors --backtitle "${ABACO_TITLE} - \Z1Please wait for flashing to complete\Z0" --exit-label 'Exit when flash completes' --programbox "Flashing target..." 25 85 2> /dev/null; FLASH_OK=true;;
        1) abort; clear; exit -1;;
        255) echo "[ESC] key pressed.";;
     esac
@@ -163,7 +164,7 @@ ask_open_shell() {
   response=$?
   case $response in
      0) cd $ROOT/Linux_for_Tegra/rootfs;gnome-terminal -e "bash -c \"printf 'Abaco QEMU shell for $OS\nPlease make any modifications then type exit to finish:\n\n';LANG=en_US.UTF-8 chroot . /bin/bash\"" &> /dev/null
-        cd ..
+        cd .. &> /dev/null
         dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "QEMU filesystem shell open..." --msgbox "Press OK when you have finished modifying the filesystem." 5 70
         ;;
   esac
@@ -230,19 +231,18 @@ Exit \"Exit to the shell\"  2> \"${INPUT}\""
   echo '60' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${PREPARE}" --gauge "Expanding ${L4T_RELEASE_PACKAGE}" ${PROGRESS_HEIGHT} 75 0
   tar xf ./${L4T_RELEASE_PACKAGE} 
 
-  cd ./Linux_for_Tegra/rootfs
+  cd $ROOT/Linux_for_Tegra/rootfs &> /dev/null
   TMP=${DOWNLOAD_FS##*/} 
+
   echo '80' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${PREPARE}" --gauge "Expanding ${TMP}" ${PROGRESS_HEIGHT} 75 0
   tar xpf ${DOWNLOAD_FS}
 
-  cd ..
+  cd .. &> /dev/null
   echo '90' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${CONFIGURE}" --gauge 'Applying binaries...' ${PROGRESS_HEIGHT} 75 
   ./apply_binaries.sh > /dev/null
+
   echo '95' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${CONFIGURE}" --gauge 'Setting up QEMU emulator...' ${PROGRESS_HEIGHT} 75 
   cp /usr/bin/qemu-aarch64-static ./rootfs/usr/bin/. &> /dev/null
-
-  ## Preload the nVidia librarys Packlunch
-  select_packlunch $PACKLUNCH_FILENAME
 
   # If the kernel has been rebuilt offer to copy the Image in
   check_for_kernel_update
@@ -274,7 +274,7 @@ Filesystem setup complete you can now login using:\n
 check_setup() {
   if [ "$EUID" -ne 0 ]
   then 
-    echo "Please run as root"
+    printf "Please run from root shell or from user as show below:\n    sudo bash -c \"./ezyflash.sh\"\n\n"
     exit -1
   fi
 
@@ -286,7 +286,7 @@ check_setup() {
   else
     read -p "Install dialog command (y/n)?" choice
     case "$choice" in 
-      y|Y ) sudo apt-get -qqy install dialog;;
+      y|Y ) apt-get -qqy install dialog;;
       n|N ) echo "Command required quitting..."; exit;;
       * ) echo "invalid";;
     esac
@@ -352,7 +352,7 @@ rebuild_kernel() {
   fi
 
   # create .config the offer to edit it (menuconfig)
-  cd $ROOT/$KERNEL
+  cd $ROOT/$KERNEL &> /dev/null
   mkdir $TEGRA_KERNEL_OUT &> /dev/null
   make mrproper 
 
@@ -367,7 +367,7 @@ rebuild_kernel() {
   MENUCONFIG="Setting up Menuconfig"
   case $response in
      0) echo '50' | dialog --backtitle "${ABACO_TITLE}${VERSION}" --title "${MENUCONFIG}" --gauge 'Installing libcursers...' ${PROGRESS_HEIGHT} 70 
-        sudo apt-get -qqy install libncurses5-dev &> /dev/null  # cant build menusystem without this on 16.04 LTS 
+        apt-get -qqy install libncurses5-dev &> /dev/null  # cant build menusystem without this on 16.04 LTS 
         make menuconfig KCONFIG_CONFIG=$TEGRA_KERNEL_OUT/.config 2> /dev/null
         ;;
   esac
@@ -545,11 +545,11 @@ menuitem=$(cat ${INPUT})
 case $menuitem in
   flash) setup_l4t;;
   kernel) rebuild_kernel;;
-  quick) cd $ROOT/Linux_for_Tegra &> /dev/null;flash_filesystem -r;cd ..;clear;;
+  quick) cd $ROOT/Linux_for_Tegra &> /dev/null;pwd; exit;flash_filesystem -r;cd ..;clear;;
   Exit) abort;exit;;
 esac
-
 cleanup
+echo " How did I get here ?"
 
 
 
