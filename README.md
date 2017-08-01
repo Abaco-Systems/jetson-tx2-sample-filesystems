@@ -13,7 +13,7 @@ These have been tested against the latest L4T R28.1 (July 2017).
 To flash these images follow the [Quickstart Guide](https://developer.nvidia.com/embedded/dlc/l4t-quick-start-guide-28-1) on the nVidia website and substitue these filesystems for the nVidia sample filesystem.
 
 NOTE
-> Command line only filesystem includes some additional packages to get you going these include ethtool, isc-dhcp-client, nano, net-tools, pci-utils, ping, sudo, udev. Xfce4 Desktop Environment also contains these tools plut a minimal Desktop Environment. 
+> Command line only filesystem includes some additional packages to get you going these include **ethtool, isc-dhcp-client, nano, net-tools, pci-utils, ping, sudo, udev**. Xfce4 Desktop Environment also contains these tools plus a minimal Desktop Environment. 
 
 All file systems come with one administrator user account  
 password : **abaco**  
